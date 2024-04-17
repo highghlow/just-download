@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, render_template, request
 import requests
 import urllib.parse
 import os
@@ -25,16 +25,7 @@ def save_config(config):
 @app.route("/")
 def index():
     print(request)
-    return """
-
-
-<form action="/set-config" method="POST">
-    <textarea name="config">"""+html.escape(json.dumps(load_config()))+"""</textarea>
-    <br>
-    <input type="submit" value="Set config">
-</form>
-
-"""
+    return render_template("index.html", config=json.dumps(load_config()))
 
 @app.route("/search")
 def search():
@@ -50,8 +41,6 @@ def search():
         response = requests.get(search_url, params=params)
         response.raise_for_status()
 
-        print(response.text)
-
         xml_response = ET.fromstring(response.text)
         channel = xml_response[0]
         for item in channel:
@@ -60,12 +49,15 @@ def search():
             item_info = dict()
             store_text = ["title", "size"]
             store_attr = {"enclosure": "url"}
+            store_attr_tag = ["peers", "seeders"]
             for prop in item:
                 print(prop.tag, prop.attrib, prop.text)
                 if prop.tag in store_text:
                     item_info[prop.tag] = prop.text
                 if store_key := store_attr.get(prop.tag):
                     item_info[prop.tag] = prop.attrib[store_key]
+                if prop.tag.endswith("}attr") and prop.attrib["name"] in store_attr_tag:
+                    item_info[prop.attrib["name"]] = prop.attrib["value"]
             results.append(item_info)
     return results
 
@@ -84,7 +76,7 @@ def download():
     tconfig = config["transmission"]
     print(torrent_url)
     client = transmission_rpc.Client(host=tconfig["host"], port=tconfig["port"])
-    # client.add_torrent(torrent_url)
+    client.add_torrent(torrent_url)
     
     return {"status": "started"}
 
