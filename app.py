@@ -9,7 +9,7 @@ import html
 
 app = Flask(__name__)
 CONFIG_LOCATION = os.environ.get("CONFIG_LOCATION", "./config.json")
-DEFAULT_CONFIG = os.environ.get("CONFIG")
+DEFAULT_CONFIG = json.loads(os.environ.get("CONFIG", "{}"))
 
 def load_config():
     if not os.path.exists(CONFIG_LOCATION):
