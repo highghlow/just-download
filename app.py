@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, send_from_directory, request
 import requests
 import urllib.parse
 import os
@@ -107,4 +107,6 @@ def download():
     
     return {"status": "started"}
 
-
+@app.route("/public/<path:path>")
+def public_files(path):
+    return send_from_directory("public", path)
