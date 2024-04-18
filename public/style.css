@@ -40,6 +40,7 @@ button:active, input[type="submit"]:active, input[type="button"]:active {
 	color: var(--black);
 }
 
+/* Search */
 div#search-container {
 	width: 100%;
 	display: flex;
@@ -50,8 +51,10 @@ input#search-field {
 	margin-right: 5px;
 }
 
+/* Download progress */
 div#download-progress {
 	width: fit-content;
+	max-width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -83,6 +86,26 @@ div.download-box[data-status="stopped"] {
 	border-color: darkred;
 }
 
+/* Download box */
+div.download-box span {
+	display: block;
+}
+
+span.torrent-title {
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+}
+
+span.download-percentage:after {
+	content: "%";
+}
+
+div.download-box[data-status="downloading"] span.eta:before {
+	content: "ETA: ";
+}
+
+/* Search results */
 table#search-results-outer {
 	width: 100%;
 }

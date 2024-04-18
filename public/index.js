@@ -2,7 +2,7 @@ let input_field = document.getElementById("search-field");
 let search_notice = document.getElementById("search-notice");
 let search_results_elem = document.getElementById("search-results");
 
-setInterval(update_download_progress, 1000);
+setInterval(update_download_progress, 5000);
 
 input_field.addEventListener("keypress", function(event) {
 	if (event.key === "Enter") {
@@ -28,7 +28,19 @@ function download(event) {
 }
 
 function displayDownloadInfo(elem, torrent) {
-	elem.textContent = torrent.title + " " + torrent.percent + "% " + (torrent.eta_text ? "ETA: " + torrent.eta_text : "");
+	let titleElem = document.createElement("span");
+	titleElem.classList.add("torrent-title")
+	titleElem.textContent = torrent.title;
+
+	let downloadPercentage = document.createElement("span");
+	downloadPercentage.classList.add("download-percentage");
+	downloadPercentage.textContent = torrent.percent;
+
+	let etaElem = document.createElement("span");
+	etaElem.classList.add("eta");
+	etaElem.textContent = torrent.eta_text;
+
+	elem.replaceChildren(titleElem, downloadPercentage, etaElem);
 }
 
 function update_download_progress() {
