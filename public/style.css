@@ -1,0 +1,125 @@
+:root {
+	--white: #DADADA;
+	--grey: #AAAAAA;
+	--darkgrey: #222222;
+	--black: #1C1C1C;
+}
+
+html {
+	color: var(--white);
+	background-color: var(--black);
+}
+
+
+h2 {
+	text-align: center;
+}
+
+input, button, textarea {
+	color: var(--white);
+	background-color: transparent;
+	border-color: var(--white);
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+input::placeholder {
+	color: var(--grey);
+}
+
+input:focus, button:hover, textarea:focus {
+	outline: none;
+	border-style: dashed;
+}
+
+button:active, input[type="submit"]:active, input[type="button"]:active {
+	background-color: var(--white);
+	border-color: transparent;
+	color: var(--black);
+}
+
+div#search-container {
+	width: 100%;
+	display: flex;
+}
+
+input#search-field {
+	flex-grow: 1;
+	margin-right: 5px;
+}
+
+div#download-progress {
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.download-box {
+	margin-bottom: 10px;
+	padding: 10px;
+	background-color: transparent;
+	border-radius: 10px;
+	border-width: 1px;
+	border-style: solid;
+
+	min-height: 30px;
+}
+
+div.download-box:hover {
+	border-style: dashed;
+}
+
+div.download-box[data-status="downloading"] {
+	border-color: olive;
+}
+
+div.download-box[data-status="seeding"] {
+	border-color: darkgreen;
+}
+
+div.download-box[data-status="stopped"] {
+	border-color: darkred;
+}
+
+table#search-results-outer {
+	width: 100%;
+}
+
+table#search-results-outer tr {
+	background-color: transparent;
+}
+
+table#search-results-outer tr:not(:first-child):hover {
+	background-color: var(--darkgrey);
+}
+
+table#search-results-outer {
+	border-collapse: collapse;
+}
+
+tr:first-child {
+	border-bottom-style: solid;
+	border-width: 1px;
+	border-color: var(--white);
+}
+
+tr:only-child {
+	display: none;
+}
+
+table button {
+	border-style: solid;
+	border-color: transparent;
+}
+
+table button:hover:not(:active) {
+	border-style: dashed;
+	border-color: var(--white);
+}
+
+p#search-notice {
+	text-align: center;
+	color: var(--grey);
+}

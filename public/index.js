@@ -33,21 +33,23 @@ function displayDownloadInfo(elem, torrent) {
 
 function update_download_progress() {
 	fetch("/progress")
-		.then((response) => response.json())
-		.then((data) => data.forEach((torrent) => {
-			let download_progress_container = document.getElementById("download-progress");
-			let display_elem = Array.from(download_progress_container.children).find((elem) => elem.dataset.id == torrent.id);
+		.then((response) => response.json()
+			.then((data) => data.forEach((torrent) => {
+				let download_progress_container = document.getElementById("download-progress");
+				let display_elem = Array.from(download_progress_container.children).find((elem) => elem.dataset.id == torrent.id);
 
-			if (display_elem == null) {
-				display_elem = document.createElement("div");
-				display_elem.dataset.id = torrent.id;
-				display_elem.dataset.status = torrent.status;
-				display_elem.classList = ["download-box"];
-				download_progress_container.appendChild(display_elem);
-			}
+				if (display_elem == null) {
+					display_elem = document.createElement("div");
+					display_elem.dataset.id = torrent.id;
+					display_elem.dataset.status = torrent.status;
+					display_elem.classList = ["download-box"];
+					download_progress_container.appendChild(display_elem);
+				}
 
-			displayDownloadInfo(display_elem, torrent);
-		}))
+				displayDownloadInfo(display_elem, torrent);
+			})),
+			// On fail
+			(error) => search_notice.textContent = "Failed! ("+error+")")
 }
 update_download_progress();
 

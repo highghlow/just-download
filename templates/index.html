@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 
+<link rel="stylesheet" href="/public/style.css">
 
-<div>
+<div id="search-container">
     <input type="search" id="search-field" placeholder="Search..."/>
     <button id="search-button" onclick="search()">Search</button>
 </div>
@@ -10,13 +11,13 @@
 <div id="download-progress"></div>
 
 <h2>Search results</h2>
-<table id="search-results"><tr>
+<table id="search-results-outer"><tbody id="search-results"><tr>
 		<th>Title</th>
 		<th>Size</th>
 		<th>S</th>
 		<th>P</th>
 		<th>Download</th>
-</tr></table>
+</tr></tbody></table>
 <p id="search-notice">Press "Search" to search</p>
 
 <form action="/set-config" method="POST">
