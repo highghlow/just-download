@@ -105,6 +105,14 @@ div.download-box[data-status="downloading"] span.eta:before {
 	content: "ETA: ";
 }
 
+/* Errors */
+div#indexer-errors > * {
+	background-color: darkred;
+	padding: 10px;
+	border-radius: 10px;
+	width: fit-content;
+}
+
 /* Search results */
 table#search-results-outer {
 	width: 100%;

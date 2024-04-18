@@ -1,6 +1,7 @@
 let input_field = document.getElementById("search-field");
 let search_notice = document.getElementById("search-notice");
 let search_results_elem = document.getElementById("search-results");
+let indexer_errors_elem = document.getElementById("indexer-errors");
 
 setInterval(update_download_progress, 5000);
 
@@ -65,6 +66,17 @@ function update_download_progress() {
 }
 update_download_progress();
 
+function displayErrors(elem, errors) {
+	errors.forEach((error) => {
+		console.log(error);
+		
+		let error_elem = document.createElement("p");
+		error_elem.textContent = "Indexer " + error.indexer + " failed with code " + error.code;
+
+		elem.appendChild(error_elem);
+	})
+}
+
 function search() {
 	let query = document.getElementById("search-field").value;
 
@@ -76,10 +88,12 @@ function search() {
 		.then((response) => response.json())
 		.then((data) => {
 			search_notice.textContent = "";
-			if (data.length == 0) { search_notice.textContent = "No results" }
-			data.forEach((search_result) => {
-				console.log(search_result);
+			if (data.results.length == 0) { search_notice.textContent = "No results" }
 
+			indexer_errors_elem.replaceChildren();
+			displayErrors(indexer_errors_elem, data.errors);
+
+			data.results.forEach((search_result) => {
 				let table_row = document.createElement("tr");
 
 				let title_elem = document.createElement("td");

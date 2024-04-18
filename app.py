@@ -37,15 +37,32 @@ def search():
     query = request.args["q"]
 
     results = []
+    indexer_errors = []
     print("Starting search:", query)
-    for indexer in config["indexers"]:
+    for iid, indexer in enumerate(config["indexers"]):
         search_url = urllib.parse.urljoin(indexer["url"], "api")
         params = {"t": "search", "q": query, "apikey":indexer.get("api_key")}
         
-        response = requests.get(search_url, params=params)
-        response.raise_for_status()
+        try:
+            response = requests.get(search_url, params=params, timeout=indexer.get("timeout"))
+        except requests.exceptions.ConnectionError as e:
+            indexer_errors.append({
+                "code": -1,
+                "description": str(e),
+                "indexer": iid
+            })
+            continue
 
         xml_response = ET.fromstring(response.text)
+        if not response.ok:
+            error = xml_response.attrib
+            indexer_errors.append({
+                "code": error["code"],
+                "description": error["description"],
+                "indexer": iid
+            })
+            continue
+
         channel = xml_response[0]
         for item in channel:
             if item.tag != "item":
@@ -63,7 +80,7 @@ def search():
                 if prop.tag.endswith("}attr") and prop.attrib["name"] in store_attr_tag:
                     item_info[prop.attrib["name"]] = prop.attrib["value"]
             results.append(item_info)
-    return results
+    return {"results": results, "errors": indexer_errors}
 
 @app.route("/progress")
 def download_progress():
