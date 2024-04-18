@@ -22,6 +22,10 @@ def save_config(config):
     with open(CONFIG_LOCATION, "w") as f:
         json.dump(config, f)
 
+def make_transmission_client(config):
+    tconfig = config["transmission"]
+    return transmission_rpc.Client(host=tconfig["host"], port=tconfig["port"], username=tconfig.get("username"), password=tconfig.get("password"))
+
 @app.route("/")
 def index():
     print(request)
@@ -73,9 +77,8 @@ def download():
     config = load_config()
     torrent_url = request.form["url"]
     
-    tconfig = config["transmission"]
     print(torrent_url)
-    client = transmission_rpc.Client(host=tconfig["host"], port=tconfig["port"])
+    client = make_transmission_client(config)
     client.add_torrent(torrent_url)
     
     return {"status": "started"}
