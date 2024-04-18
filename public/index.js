@@ -74,36 +74,39 @@ function search() {
 
 	fetch("/search?" + new URLSearchParams({q: query}), {method: "GET"})
 		.then((response) => response.json())
-		.then((data) => data.forEach((search_result) => {
+		.then((data) => {
 			search_notice.textContent = "";
-			console.log(search_result);
+			if (data.length == 0) { search_notice.textContent = "No results" }
+			data.forEach((search_result) => {
+				console.log(search_result);
 
-			let table_row = document.createElement("tr");
+				let table_row = document.createElement("tr");
 
-			let title_elem = document.createElement("td");
-			title_elem.textContent = search_result.title;
+				let title_elem = document.createElement("td");
+				title_elem.textContent = search_result.title;
 
-			let size_elem = document.createElement("td");
-			size_elem.textContent = humanFileSize(search_result.size);
+				let size_elem = document.createElement("td");
+				size_elem.textContent = humanFileSize(search_result.size);
 
-			let seeders_elem = document.createElement("td");
-			seeders_elem.textContent = search_result.seeders;
+				let seeders_elem = document.createElement("td");
+				seeders_elem.textContent = search_result.seeders;
 
-			let peers_elem = document.createElement("td");
-			peers_elem.textContent = search_result.peers;
+				let peers_elem = document.createElement("td");
+				peers_elem.textContent = search_result.peers;
 
-			let download_elem = document.createElement("td");
-			let download_button = document.createElement("button");
+				let download_elem = document.createElement("td");
+				let download_button = document.createElement("button");
 
-			download_button.textContent = "Download";
-			download_button.dataset.download_url = search_result.enclosure;
-			download_button.addEventListener("click", download);
+				download_button.textContent = "Download";
+				download_button.dataset.download_url = search_result.enclosure;
+				download_button.addEventListener("click", download);
 
-			download_elem.replaceChildren(download_button);
+				download_elem.replaceChildren(download_button);
 
-			table_row.replaceChildren(title_elem, size_elem, seeders_elem, peers_elem, download_elem);
-			search_results_elem.appendChild(table_row);
-		}));
+				table_row.replaceChildren(title_elem, size_elem, seeders_elem, peers_elem, download_elem);
+				search_results_elem.appendChild(table_row);
+			})
+		});
 }
 
 function humanFileSize(bytes, si=false, dp=1) {
