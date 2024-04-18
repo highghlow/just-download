@@ -35,6 +35,7 @@ def index():
 def search():
     config = load_config()
     query = request.args["q"]
+    debug = request.args.get("debug")
 
     results = []
     indexer_errors = []
@@ -54,6 +55,8 @@ def search():
             continue
 
         xml_response = ET.fromstring(response.text)
+        if debug:
+            print(response.text)
         if not response.ok:
             error = xml_response.attrib
             indexer_errors.append({
@@ -72,7 +75,6 @@ def search():
             store_attr = {"enclosure": "url"}
             store_attr_tag = ["peers", "seeders"]
             for prop in item:
-                print(prop.tag, prop.attrib, prop.text)
                 if prop.tag in store_text:
                     item_info[prop.tag] = prop.text
                 if store_key := store_attr.get(prop.tag):
