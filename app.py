@@ -71,15 +71,12 @@ def search():
             if item.tag != "item":
                 continue
             item_info = dict()
-            store_text = ["title", "size"]
-            store_attr = {"enclosure": "url"}
-            store_attr_tag = ["peers", "seeders"]
+            store_text = ["title", "size", "link"]
+            store_attr = ["peers", "seeders"]
             for prop in item:
                 if prop.tag in store_text:
                     item_info[prop.tag] = prop.text
-                if store_key := store_attr.get(prop.tag):
-                    item_info[prop.tag] = prop.attrib[store_key]
-                if prop.tag.endswith("}attr") and prop.attrib["name"] in store_attr_tag:
+                if prop.tag.endswith("}attr") and prop.attrib["name"] in store_attr:
                     item_info[prop.attrib["name"]] = prop.attrib["value"]
             results.append(item_info)
     return {"results": results, "errors": indexer_errors}

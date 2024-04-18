@@ -112,7 +112,7 @@ function search() {
 				let download_button = document.createElement("button");
 
 				download_button.textContent = "Download";
-				download_button.dataset.download_url = search_result.enclosure;
+				download_button.dataset.download_url = search_result.link;
 				download_button.addEventListener("click", download);
 
 				download_elem.replaceChildren(download_button);
