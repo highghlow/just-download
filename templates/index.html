@@ -5,6 +5,9 @@
     <button id="search-button" onclick="search()">Search</button>
 </div>
 
+<h2>Download progress</h2>
+<div id="download-progress"></div>
+
 <h2>Search results</h2>
 <table id="search-results"><tr>
 		<th>Title</th>
@@ -27,6 +30,8 @@ let input_field = document.getElementById("search-field");
 let search_notice = document.getElementById("search-notice");
 let search_results_elem = document.getElementById("search-results");
 
+setInterval(update_download_progress, 1000);
+
 input_field.addEventListener("keypress", function(event) {
 	if (event.key === "Enter") {
 		event.preventDefault();
@@ -46,7 +51,33 @@ function download(event) {
 				event.target.textContent = "Failed!";
 			}
 		});
+
+	update_download_progress();
 }
+
+function displayDownloadInfo(elem, torrent) {
+	elem.textContent = torrent.title + " " + torrent.percent + "% " + (torrent.eta_text ? "ETA: " + torrent.eta_text : "");
+}
+
+function update_download_progress() {
+	fetch("/progress")
+		.then((response) => response.json())
+		.then((data) => data.forEach((torrent) => {
+			let download_progress_container = document.getElementById("download-progress");
+			let display_elem = Array.from(download_progress_container.children).find((elem) => elem.dataset.id == torrent.id);
+
+			if (display_elem == null) {
+				display_elem = document.createElement("div");
+				display_elem.dataset.id = torrent.id;
+				display_elem.dataset.status = torrent.status;
+				display_elem.classList = ["download-box"];
+				download_progress_container.appendChild(display_elem);
+			}
+
+			displayDownloadInfo(display_elem, torrent);
+		}))
+}
+update_download_progress();
 
 function search() {
 	let query = document.getElementById("search-field").value;

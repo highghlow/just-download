@@ -65,6 +65,30 @@ def search():
             results.append(item_info)
     return results
 
+@app.route("/progress")
+def download_progress():
+    config = load_config()
+    client = make_transmission_client(config)
+    downloads = client.get_torrents()
+    result = []
+
+    for torrent in downloads:
+        download_info = {
+            "id": torrent.hashString,
+            "title": torrent.get_files()[0].name.split("/")[0],
+            "download_rate": torrent.rate_download,
+            "upload_rate": torrent.rate_upload,
+            "status": str(torrent.status),
+            "eta": torrent.eta.total_seconds() if torrent.eta is not None else None,
+            "eta_text": torrent.format_eta() if torrent.eta is not None else None,
+            "peers_connected": torrent.peers_connected,
+            "peers_found": sum(torrent.peers_from.values()),
+            "percent": round(torrent.percent_done * 100, 1)
+        }
+        result.append(download_info)
+
+    return result
+
 @app.route("/set-config", methods=["POST"])
 def set_config():
     print(request.form)
