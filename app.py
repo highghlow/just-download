@@ -45,7 +45,7 @@ def search():
         
         try:
             response = requests.get(search_url, params=params, timeout=indexer.get("timeout"))
-        except requests.exceptions.ConnectionError as e:
+        except (requests.exceptions.ConnectionError, requests.exceptions.ReadTimeout) as e:
             indexer_errors.append({
                 "code": -1,
                 "description": str(e),
