@@ -54,10 +54,10 @@ function update_download_progress() {
 				if (display_elem == null) {
 					display_elem = document.createElement("div");
 					display_elem.dataset.id = torrent.id;
-					display_elem.dataset.status = torrent.status;
 					display_elem.classList = ["download-box"];
 					download_progress_container.appendChild(display_elem);
 				}
+				display_elem.dataset.status = torrent.status;
 
 				displayDownloadInfo(display_elem, torrent);
 			})),
