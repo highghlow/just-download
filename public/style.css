@@ -29,7 +29,7 @@ input::placeholder {
 	color: var(--grey);
 }
 
-input:focus, button:hover, textarea:focus {
+input:focus, button:hover, input[type="submit"]:hover, input[type="button"]:hover, textarea:focus {
 	outline: none;
 	border-style: dashed;
 }
