@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   sodipodi:docname="icon.svg"
+   inkscape:export-filename="icon-filled.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showguides="true"
+     inkscape:zoom="0.82226563"
+     inkscape:cx="487.06888"
+     inkscape:cy="169.04513"
+     inkscape:window-width="1912"
+     inkscape:window-height="1048"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     inkscape:export-bgcolor="#ffffff00">
+    <sodipodi:guide
+       position="20,512"
+       orientation="-1,0"
+       id="guide3"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="0,492"
+       orientation="0,1"
+       id="guide4"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="492,512"
+       orientation="-1,0"
+       id="guide5"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="0,20"
+       orientation="0,1"
+       id="guide6"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline">
+    <rect
+       style="display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:40;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect6"
+       width="512"
+       height="512"
+       x="0"
+       y="0"
+       inkscape:label="Background2" />
+    <g
+       id="g6"
+       inkscape:label="Background"
+       style="display:inline">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:289.618px;font-family:'RobotoMono Nerd Font';-inkscape-font-specification:'RobotoMono Nerd Font Bold';fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:40;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         x="12.927485"
+         y="222.70253"
+         id="text3"
+         transform="scale(0.69870103,1.4312273)"
+         inkscape:label="Text white"><tspan
+           sodipodi:role="line"
+           id="tspan3"
+           x="12.927485"
+           y="222.70253"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'RobotoMono Nerd Font';-inkscape-font-specification:'RobotoMono Nerd Font Bold';fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:40;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1">JUST</tspan></text>
+      <path
+         style="mix-blend-mode:normal;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:40;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         d="M 184.14285,19.999862 V 340.23217 H 20.000135 L 255.99995,491.99986 492.00015,340.23217 H 317.36036 V 19.999862 Z"
+         id="path3"
+         sodipodi:nodetypes="cccccccc"
+         inkscape:label="Arrow top" />
+    </g>
+    <g
+       id="g6-8"
+       inkscape:label="Foreground"
+       style="display:inline">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:289.618px;font-family:'RobotoMono Nerd Font';-inkscape-font-specification:'RobotoMono Nerd Font Bold';fill:#ffffff;fill-opacity:1;stroke-width:99.4771;stroke-dasharray:none"
+         x="12.927485"
+         y="222.70253"
+         id="text3-5"
+         transform="scale(0.69870103,1.4312273)"
+         inkscape:label="Text white"><tspan
+           sodipodi:role="line"
+           id="tspan3-3"
+           x="12.927485"
+           y="222.70253"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'RobotoMono Nerd Font';-inkscape-font-specification:'RobotoMono Nerd Font Bold';stroke-width:99.4771;stroke-dasharray:none">JUST</tspan></text>
+      <path
+         style="mix-blend-mode:difference;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:18.208;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         d="M 184.14285,19.999862 V 340.23217 H 20.000135 L 255.99995,491.99986 492.00015,340.23217 H 317.36036 V 19.999862 Z"
+         id="path3-3"
+         sodipodi:nodetypes="cccccccc"
+         inkscape:label="Arrow top" />
+    </g>
+  </g>
+</svg>
