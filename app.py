@@ -75,7 +75,7 @@ def search():
             if item.tag != "item":
                 continue
             item_info = dict()
-            store_text = ["title", "size", "link"]
+            store_text = ["title", "size", "link", "description"]
             store_attr = ["peers", "seeders"]
             for prop in item:
                 if prop.tag in store_text:

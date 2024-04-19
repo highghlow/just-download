@@ -97,7 +97,7 @@ function search() {
 				let table_row = document.createElement("tr");
 
 				let title_elem = document.createElement("td");
-				title_elem.textContent = search_result.title;
+				title_elem.textContent = search_result.description;
 
 				let size_elem = document.createElement("td");
 				size_elem.textContent = humanFileSize(search_result.size);
