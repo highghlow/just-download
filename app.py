@@ -28,17 +28,20 @@ def make_transmission_client(config):
 
 @app.route("/")
 def index():
-    print(request)
     return render_template("index.html", config=json.dumps(load_config()))
+
+@app.route("/debug")
+def debug():
+    return render_template("debug.html", config=json.dumps(load_config()))
 
 @app.route("/search")
 def search():
     config = load_config()
     query = request.args["q"]
-    debug = request.args.get("debug")
 
     results = []
     indexer_errors = []
+    raw_responses = []
     print("Starting search:", query)
     for iid, indexer in enumerate(config["indexers"]):
         search_url = urllib.parse.urljoin(indexer["url"], "api")
@@ -52,11 +55,12 @@ def search():
                 "description": str(e),
                 "indexer": iid
             })
+            raw_responses.append(str(e))
             continue
 
+        raw_responses.append(response.text)
+
         xml_response = ET.fromstring(response.text)
-        if debug:
-            print(response.text)
         if not response.ok:
             error = xml_response.attrib
             indexer_errors.append({
@@ -79,7 +83,7 @@ def search():
                 if prop.tag.endswith("}attr") and prop.attrib["name"] in store_attr:
                     item_info[prop.attrib["name"]] = prop.attrib["value"]
             results.append(item_info)
-    return {"results": results, "errors": indexer_errors}
+    return {"results": results, "errors": indexer_errors, "raw": raw_responses}
 
 @app.route("/progress")
 def download_progress():

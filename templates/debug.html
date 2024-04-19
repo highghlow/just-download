@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="/public/style.css">
+<link rel="stylesheet" href="/public/debug.css">
+<title>Debug</title>
+
+<h2>Config</h2>
+
+<pre id="config">{{ config|e }}</pre>
+
+<h2>Search</h2>
+
+<input id="search-query", placeholder="Search query"></input>
+<button onclick="search()">Search</button>
+
+<div id="raw-search-xml"></div>
+<pre id="raw-response"></pre>
+
+<script src="/public/debug.js"></script>
