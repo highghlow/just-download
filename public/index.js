@@ -101,12 +101,15 @@ function search() {
 
 				let size_elem = document.createElement("td");
 				size_elem.textContent = humanFileSize(search_result.size);
+				size_elem.dataset.sort_value = search_result.size;
 
 				let seeders_elem = document.createElement("td");
 				seeders_elem.textContent = search_result.seeders;
+				seeders_elem.dataset.sort_value = search_result.seeders;
 
 				let peers_elem = document.createElement("td");
 				peers_elem.textContent = search_result.peers;
+				peers_elem.dataset.sort_value = search_result.peers;
 
 				let download_elem = document.createElement("td");
 				let download_button = document.createElement("button");
@@ -143,4 +146,63 @@ function humanFileSize(bytes, si=false, dp=1) {
 
 
   return bytes.toFixed(dp) + ' ' + units[u];
+}
+
+function sortTable(th, n) {
+  var table, rows, switching, i, x, y, a_value, b_value, shouldSwitch, dir, switchcount = 0;
+  switching = true;
+  table = th.parentElement.parentElement;
+  // Set the sorting direction to ascending:
+  dir = "asc";
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      
+      a_value = x.dataset.sort_value?+x.dataset.sort_value:x.innerHTML.toLowerCase();
+      b_value = y.dataset.sort_value?+y.dataset.sort_value:y.innerHTML.toLowerCase();
+
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (a_value > b_value) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (a_value < b_value) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
 }
