@@ -123,7 +123,7 @@ def download():
     
     print(torrent_url)
     client = make_transmission_client(config)
-    client.add_torrent(torrent_url, download_dir=config["transmission"]["download_dir"])
+    client.add_torrent(torrent_url, download_dir=config["transmission"].get("download_dir"))
     
     return {"status": "started"}
 
