@@ -1,5 +1,5 @@
 # Just. Download!
-Simply search and downloads movies, games, books, etc. from your favourite torrent indexer!
+Simply search and download movies, games, books, etc. from your favourite torrent indexer!
 
 ## Quickstart
 Run the app with docker (set config):
