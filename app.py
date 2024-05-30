@@ -88,8 +88,12 @@ def search():
 @app.route("/progress")
 def download_progress():
     config = load_config()
-    client = make_transmission_client(config)
-    downloads = client.get_torrents()
+    try:
+        client = make_transmission_client(config)
+        downloads = client.get_torrents()
+    except (transmission_rpc.error.TransmissionError, json.decoder.JSONDecodeError) as e:
+        return ({"error": str(e), "downloads": []}, 500)
+
     result = []
 
     for torrent in downloads:
