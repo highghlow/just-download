@@ -1,0 +1,76 @@
+const config = JSON.parse(document.getElementById("config").innerText)
+const config_target = document.getElementById("config-target");
+const config_send = document.getElementById("config-send");
+const tracker_list = document.getElementById("tracker-list");
+
+const init_config = () => {
+  Array.from(document.getElementsByClassName("config-input")).forEach((elem) => {
+    elem.value = eval("config."+elem.dataset.entry);
+  });
+
+  config.indexers.forEach((tracker) => {
+    add_tracker(tracker.url, tracker.api_key);
+  });
+}
+
+const save = () => {
+  let new_trackers = [];
+  Array.from(document.getElementsByClassName("tracker-entry")).forEach((elem) => {
+    let url = elem.getElementsByClassName("tracker-url-input").item(0).value;
+    let api_key = elem.getElementsByClassName("tracker-api-key-input").item(0).value;
+
+    if (api_key == "") { api_key = null; }
+
+    new_trackers.push({ url: url, api_key: api_key });
+  });
+
+  config.indexers = new_trackers;
+
+  Array.from(document.getElementsByClassName("config-input")).forEach((elem) => {
+    let val = elem.value;
+    if (elem.dataset.int) { val = +val }
+    eval("config."+elem.dataset.entry+"=val");
+  });
+  config_target.innerText = JSON.stringify(config);
+  config_send.click();
+};
+
+const add_empty_tracker = () => {
+  add_tracker("", "");
+}
+
+const add_tracker = (url, api_key) => {
+  let new_tracker = document.createElement("div");
+
+  let url_input_label = document.createElement("span");
+  url_input_label.innerText = "Torznab Url:";
+
+  let url_input = document.createElement("input");
+  url_input.classList.add("tracker-url-input");
+  url_input.value = url;
+
+  new_tracker.appendChild(url_input_label);
+  new_tracker.appendChild(url_input);
+  new_tracker.appendChild(document.createElement("br"));
+
+  let api_key_input_label = document.createElement("span");
+  api_key_input_label.innerText = "Api key (optional):";
+
+  let api_key_input = document.createElement("input");
+  api_key_input.classList.add("tracker-api-key-input");
+  api_key_input.value = api_key;
+
+  new_tracker.appendChild(api_key_input_label);
+  new_tracker.appendChild(api_key_input);
+  new_tracker.appendChild(document.createElement("br"));
+
+  let delete_button = document.createElement("button");
+  delete_button.innerText = "Remove";
+  delete_button.onclick = () => { new_tracker.remove() }
+  new_tracker.appendChild(delete_button);
+
+  new_tracker.classList.add("tracker-entry");
+  tracker_list.appendChild(new_tracker);
+}
+
+init_config();

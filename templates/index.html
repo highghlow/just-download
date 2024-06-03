@@ -15,18 +15,14 @@
 <h2>Search results</h2>
 <div id="indexer-errors"></div>
 <table id="search-results-outer"><tbody id="search-results"><tr>
-		<th onclick="sortTable(this, 0)">Description</th>
-		<th onclick="sortTable(this, 1)">Size</th>
-		<th onclick="sortTable(this, 2)">S</th>
-		<th onclick="sortTable(this, 3)">P</th>
-		<th>Download</th>
+    <th onclick="sortTable(this, 0)">Description</th>
+    <th onclick="sortTable(this, 1)">Size</th>
+    <th onclick="sortTable(this, 2)">S</th>
+    <th onclick="sortTable(this, 3)">P</th>
+    <th>Download</th>
 </tr></tbody></table>
 <p id="search-notice">Press "Search" to search</p>
 
-<form action="/set-config" method="POST">
-	<textarea name="config">{{ config|e }}</textarea>
-    <br>
-    <input type="submit" value="Set config">
-</form>
+<button onclick="document.location.href='/config'">Configure</button>
 
 <script src="/public/index.js"></script>

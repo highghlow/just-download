@@ -15,7 +15,7 @@ h2 {
 	text-align: center;
 }
 
-input, button, textarea {
+input, button, textarea, .tracker-entry {
 	color: var(--white);
 	background-color: transparent;
 	border-color: var(--white);
@@ -153,4 +153,8 @@ table button:hover:not(:active) {
 p#search-notice {
 	text-align: center;
 	color: var(--grey);
+}
+
+.tracker-entry {
+	margin-bottom: 10px;
 }

@@ -8,6 +8,12 @@
 
 <pre id="config">{{ config|e }}</pre>
 
+<form action="/set-config" method="POST">
+	<textarea name="config">{{ config|e }}</textarea>
+    <br>
+    <input type="submit" value="Set config">
+</form>
+
 <h2>Search</h2>
 
 <input id="search-query", placeholder="Search query"></input>

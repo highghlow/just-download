@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="/public/style.css">
+<link rel="icon" href="/public/icon.png"></link>
+<title>Just. Download.</title>
+
+<p id="config" hidden>{{ config|e }}</p>
+
+<div id="tracker-config">
+    <h3>Trackers</h3>
+
+    <div id="tracker-list"></div>
+
+    <button onclick="add_empty_tracker();">Add</button>
+</div>
+
+<div id="transmission-config" {% if lock_transmission %}hidden{% endif %}>
+    <h3>Downloading</h3>
+
+    <label for="transmission-host">Transmission host</label>
+    <input id="transmission-host" class="config-input" data-entry="transmission.host" />
+    <br />
+
+    <label for="transmission-port">Transmission port</label>
+    <input id="transmission-port" class="config-input" data-int data-entry="transmission.port" />
+    <br />
+
+    <label for="transmission-username">Transmission username (optional)</label>
+    <input id="transmission-username" class="config-input" data-entry="transmission.username" />
+    <br />
+
+    <label for="transmission-password">Transmission password (optional)</label>
+    <input id="transmission-password" class="config-input" data-entry="transmission.password" />
+    <br />
+</div>
+
+<button onclick="save();">Save</button>
+
+<form action="/set-config" method="POST" hidden>
+    <textarea name="config" id="config-target"></textarea>
+    <input name="backlink" value="/" />
+    <br>
+    <input type="submit" value="Set config" id="config-send">
+</form>
+
+<script src="/public/config.js"></script>

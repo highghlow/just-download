@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory, request
+from flask import Flask, redirect, render_template, send_from_directory, request
 import requests
 import urllib.parse
 import os
@@ -10,6 +10,8 @@ import html
 app = Flask(__name__)
 CONFIG_LOCATION = os.environ.get("CONFIG_LOCATION", "./config.json")
 DEFAULT_CONFIG = json.loads(os.environ.get("CONFIG", "{}"))
+
+LOCK_TRANSMISSION_CONFIG = "LOCK_TRANSMISSION_CONFIG" in os.environ.keys()
 
 def load_config():
     if not os.path.exists(CONFIG_LOCATION):
@@ -33,6 +35,10 @@ def index():
 @app.route("/debug")
 def debug():
     return render_template("debug.html", config=json.dumps(load_config()))
+
+@app.route("/config")
+def config():
+    return render_template("config.html", config=json.dumps(load_config()), lock_transmission=LOCK_TRANSMISSION_CONFIG)
 
 @app.route("/search")
 def search():
@@ -115,10 +121,10 @@ def download_progress():
 
 @app.route("/set-config", methods=["POST"])
 def set_config():
-    print(request.form)
+    print("Config:", request.form["config"])
     config = json.loads(request.form["config"])
     save_config(config)
-    return config
+    return redirect(request.form.get("backlink", "/"))
 
 @app.route("/download", methods=["POST"])
 def download():
