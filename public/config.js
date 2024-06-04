@@ -73,7 +73,7 @@ const add_tracker = (url, api_key, tad) => {
 
   let tad_key = "tad-"+Math.round(Math.random()*1000);
   let tad_input_label = document.createElement("label");
-  tad_input_label.for = tad_key;
+  tad_input_label.setAttribute("for", tad_key);
   tad_input_label.innerText = "Use title as description:";
 
   let tad_input = document.createElement("input");
