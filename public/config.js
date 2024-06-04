@@ -9,7 +9,7 @@ const init_config = () => {
   });
 
   config.indexers.forEach((tracker) => {
-    add_tracker(tracker.url, tracker.api_key, tracker.use_title_as_description);
+    add_tracker(tracker.url, tracker.api_key, tracker.timeout, tracker.use_title_as_description);
   });
 }
 
@@ -18,11 +18,12 @@ const save = () => {
   Array.from(document.getElementsByClassName("tracker-entry")).forEach((elem) => {
     let url = elem.getElementsByClassName("tracker-url-input").item(0).value;
     let api_key = elem.getElementsByClassName("tracker-api-key-input").item(0).value;
+    let timeout = elem.getElementsByClassName("tracker-timeout-input").item(0).value;
     let tad = elem.getElementsByClassName("tracker-tad-input").item(0).checked;
 
     if (api_key == "") { api_key = null; }
 
-    new_trackers.push({ url: url, api_key: api_key, use_title_as_description: tad });
+    new_trackers.push({ url: url, api_key: api_key, timeout: +timeout, use_title_as_description: tad });
   });
 
   config.indexers = new_trackers;
@@ -37,10 +38,10 @@ const save = () => {
 };
 
 const add_empty_tracker = () => {
-  add_tracker("", "", true);
+  add_tracker("", "", 20, true);
 }
 
-const add_tracker = (url, api_key, tad) => {
+const add_tracker = (url, api_key, timeout, tad) => {
   let new_tracker = document.createElement("div");
 
 
@@ -68,6 +69,22 @@ const add_tracker = (url, api_key, tad) => {
   new_tracker.appendChild(api_key_input_label);
   new_tracker.appendChild(api_key_input);
   new_tracker.appendChild(document.createElement("br"));
+
+
+
+
+  let timeout_input_label = document.createElement("span");
+  timeout_input_label.innerText = "Timeout (seconds):";
+
+  let timeout_input = document.createElement("input");
+  timeout_input.type = "number";
+  timeout_input.classList.add("tracker-timeout-input");
+  timeout_input.value = timeout;
+
+  new_tracker.appendChild(timeout_input_label);
+  new_tracker.appendChild(timeout_input);
+  new_tracker.appendChild(document.createElement("br"));
+
 
 
 

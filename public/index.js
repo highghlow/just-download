@@ -71,6 +71,11 @@ function displayErrors(elem, errors) {
 		
     let error_elem = document.createElement("p");
     error_elem.textContent = "Indexer " + error.indexer + " failed with code " + error.code;
+    if (error.code == -1) {
+      error_elem.textContent += ": "+error.description;
+    } else {
+      error_elem.textContent += " (check the console for details)";
+    }
 
     elem.appendChild(error_elem);
   })
