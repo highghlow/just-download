@@ -40,6 +40,12 @@ button:active, input[type="submit"]:active, input[type="button"]:active {
 	color: var(--black);
 }
 
+input[type="checkbox"] {
+	accent-color: var(--white);
+	border-width: 0px !important;
+	border-color: var(--white);
+}
+
 /* Search */
 div#search-container {
 	width: 100%;

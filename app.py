@@ -88,6 +88,10 @@ def search():
                     item_info[prop.tag] = prop.text
                 if prop.tag.endswith("}attr") and prop.attrib["name"] in store_attr:
                     item_info[prop.attrib["name"]] = prop.attrib["value"]
+
+            if indexer["use_title_as_description"]:
+                item_info["description"] = item_info["title"]
+
             results.append(item_info)
     return {"results": results, "errors": indexer_errors, "raw": raw_responses}
 
